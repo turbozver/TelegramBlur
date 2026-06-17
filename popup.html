@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Telegram Blur</title>
+    <link rel="icon" href="icons/favicon.png">
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <header class="app-header">
+        <button id="settingsBtn" class="icon-button" type="button" title="Settings">&#9881;</button>
+        <div class="title-block">
+            <h1>Telegram Blur</h1>
+            <p id="status">Enabled</p>
+        </div>
+    </header>
+
+    <main id="mainView" class="view">
+        <section class="panel">
+            <label class="switch-row">
+                <span>
+                    <strong>Blur Telegram Web</strong>
+                    <small>Chats, messages, media and avatars</small>
+                </span>
+                <input id="enabled" type="checkbox">
+            </label>
+            <label class="switch-row">
+                <span>
+                    <strong>Reveal On Hover</strong>
+                    <small>Temporarily unblur hovered item</small>
+                </span>
+                <input id="revealOnHover" type="checkbox">
+            </label>
+        </section>
+
+        <section class="panel range-panel">
+            <label>
+                <span>Text blur</span>
+                <output id="textBlurValue">7px</output>
+                <input id="textBlur" type="range" min="2" max="16" step="1">
+            </label>
+            <label>
+                <span>Avatar and media blur</span>
+                <output id="mediaBlurValue">24px</output>
+                <input id="mediaBlur" type="range" min="8" max="36" step="1">
+            </label>
+        </section>
+    </main>
+
+    <main id="settingsView" class="view hidden">
+        <section class="panel settings-stack">
+            <div class="settings-block">
+                <div class="settings-block-title">
+                    <strong>Behavior</strong>
+                    <span>Local-only controls for Telegram Web.</span>
+                </div>
+                <label class="shortcut-row">
+                    <span>
+                        <strong>Toggle shortcut</strong>
+                        <small>Works only inside the Telegram Web tab. Single keys are allowed.</small>
+                    </span>
+                    <button id="shortcutButton" type="button">Alt+Shift+B</button>
+                </label>
+                <label class="timer-row">
+                    <span>
+                        <strong>Auto-blur after idle</strong>
+                        <small>0 disables the timer</small>
+                    </span>
+                    <input id="idleBlurDelay" type="number" min="0" max="3600" step="5">
+                    <output id="idleBlurDelayValue">0s</output>
+                </label>
+            </div>
+
+            <div class="settings-block">
+                <div class="settings-block-title">
+                    <strong>About</strong>
+                    <span>Settings are stored locally in browser storage.</span>
+                </div>
+                <div class="settings-links">
+                    <a class="link-card" href="https://github.com/turbozver/TelegramBlur" target="_blank" rel="noreferrer">
+                        <span class="link-icon github-icon" aria-hidden="true"></span>
+                        <span><strong>GitHub</strong><small>Source and releases</small></span>
+                    </a>
+                    <a class="link-card" href="mailto:turbozver24@gmail.com" target="_blank" rel="noreferrer">
+                        <span class="link-icon mail-icon" aria-hidden="true"></span>
+                        <span><strong>Contact</strong><small>turbozver24@gmail.com</small></span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="settings-block">
+                <div class="settings-block-title">
+                    <strong>Data</strong>
+                    <span>Reset only this extension configuration.</span>
+                </div>
+                <div class="settings-actions">
+                    <button id="resetBtn" class="danger" type="button">Reset Settings</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="popup.js"></script>
+</body>
+</html>

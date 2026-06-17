@@ -1,0 +1,78 @@
+:root {
+    --tgblur-text-blur: 7px;
+    --tgblur-media-blur: 24px;
+}
+
+html.tgblur-enabled body {
+    --tgblur-transition: filter 120ms ease, opacity 120ms ease;
+}
+
+html.tgblur-enabled [class*="Avatar"],
+html.tgblur-enabled [class*="avatar"],
+html.tgblur-enabled [class*="Photo"],
+html.tgblur-enabled [class*="photo"],
+html.tgblur-enabled img,
+html.tgblur-enabled video,
+html.tgblur-enabled canvas {
+    filter: blur(var(--tgblur-media-blur)) brightness(0.72) !important;
+    transition: var(--tgblur-transition) !important;
+}
+
+html.tgblur-enabled [class*="peer-title"],
+html.tgblur-enabled [class*="PeerTitle"],
+html.tgblur-enabled [class*="message"],
+html.tgblur-enabled [class*="Message"],
+html.tgblur-enabled [class*="text-content"],
+html.tgblur-enabled [class*="TextContent"],
+html.tgblur-enabled [class*="subtitle"],
+html.tgblur-enabled [class*="Subtitle"],
+html.tgblur-enabled [class*="title"],
+html.tgblur-enabled [class*="Title"],
+html.tgblur-enabled [class*="sender"],
+html.tgblur-enabled [class*="Sender"],
+html.tgblur-enabled [class*="last-message"],
+html.tgblur-enabled [class*="LastMessage"],
+html.tgblur-enabled [class*="ChatInfo"],
+html.tgblur-enabled [class*="chat-info"],
+html.tgblur-enabled [data-testid*="message"],
+html.tgblur-enabled a[href^="tel:"],
+html.tgblur-enabled a[href^="mailto:"] {
+    filter: blur(var(--tgblur-text-blur)) !important;
+    transition: var(--tgblur-transition) !important;
+}
+
+html.tgblur-enabled input,
+html.tgblur-enabled textarea,
+html.tgblur-enabled [contenteditable="true"] {
+    filter: blur(var(--tgblur-text-blur)) !important;
+}
+
+html.tgblur-enabled.tgblur-reveal-hover [class*="Avatar"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="avatar"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="Photo"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="photo"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover img:hover,
+html.tgblur-enabled.tgblur-reveal-hover video:hover,
+html.tgblur-enabled.tgblur-reveal-hover canvas:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="peer-title"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="PeerTitle"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="message"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="Message"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="text-content"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="TextContent"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="subtitle"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="Subtitle"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="title"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="Title"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="sender"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="Sender"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="last-message"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="LastMessage"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="ChatInfo"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [class*="chat-info"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover [data-testid*="message"]:hover,
+html.tgblur-enabled.tgblur-reveal-hover input:hover,
+html.tgblur-enabled.tgblur-reveal-hover textarea:hover,
+html.tgblur-enabled.tgblur-reveal-hover [contenteditable="true"]:hover {
+    filter: none !important;
+}
