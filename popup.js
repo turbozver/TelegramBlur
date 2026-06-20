@@ -159,3 +159,10 @@ function clampNumber(value, min, max, fallback) {
     if (!Number.isFinite(number)) return fallback;
     return Math.min(max, Math.max(min, Math.round(number)));
 }
+
+
+document.querySelectorAll("[data-rate-link]").forEach((link) => {
+    if (navigator.userAgent.includes("Firefox")) {
+        link.href = link.dataset.firefoxUrl;
+    }
+});
