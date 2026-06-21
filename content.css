@@ -76,3 +76,35 @@ html.tgblur-enabled.tgblur-reveal-hover textarea:hover,
 html.tgblur-enabled.tgblur-reveal-hover [contenteditable="true"]:hover {
     filter: none !important;
 }
+
+html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="Avatar"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="avatar"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="Photo"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="photo"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="peer-title"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="PeerTitle"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="message"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="Message"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="subtitle"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="Subtitle"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="title"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="Title"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover img,
+html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover video,
+html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover canvas {
+    filter: none !important;
+}
+
+html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover [class*="Avatar"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover [class*="avatar"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover [class*="Photo"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover [class*="photo"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover [class*="peer-title"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover [class*="PeerTitle"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover [class*="title"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover [class*="Title"],
+html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover img,
+html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover video,
+html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover canvas {
+    filter: none !important;
+}
