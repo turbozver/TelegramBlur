@@ -1,110 +1,381 @@
 :root {
-    --tgblur-text-blur: 7px;
-    --tgblur-media-blur: 24px;
+    --tgblur-text-blur: 8px;
+    --tgblur-media-blur: 32px;
+    --tgblur-avatar-blur: 10px;
+    --tgblur-small-avatar-blur: 7px;
 }
 
 html.tgblur-enabled body {
-    --tgblur-transition: filter 120ms ease, opacity 120ms ease;
+    --tgblur-transition-delay: var(--tgblur-reveal-delay, 0s);
+    --tgblur-transition: filter 120ms ease var(--tgblur-transition-delay), opacity 120ms ease var(--tgblur-transition-delay);
 }
 
-html.tgblur-enabled [class*="Avatar"],
-html.tgblur-enabled [class*="avatar"],
-html.tgblur-enabled [class*="Photo"],
-html.tgblur-enabled [class*="photo"],
-html.tgblur-enabled img,
-html.tgblur-enabled video,
-html.tgblur-enabled canvas {
+html.tgblur-skip-return-delay body {
+    --tgblur-transition-delay: 0s;
+}
+
+html.tgblur-enabled .chatlist-chat .avatar,
+html.tgblur-enabled .chatlist-chat .peer-title,
+html.tgblur-enabled .chatlist-chat .dialog-subtitle-parts,
+html.tgblur-enabled .chatlist-chat .dialog-group-call-icon,
+html.tgblur-enabled .stories-list [role="button"] .peer-title,
+html.tgblur-enabled .bubbles .bubble:not(.service) .colored-name,
+html.tgblur-enabled .bubbles .bubble:not(.service) .bubble-name-forwarded,
+html.tgblur-enabled .bubbles .bubble:not(.service) .message,
+html.tgblur-enabled .bubbles .bubble:not(.service) .document-name,
+html.tgblur-enabled .bubbles .bubble:not(.service) .document-info,
+html.tgblur-enabled .bubbles .bubble:not(.service) .reply,
+html.tgblur-enabled .bubbles .bubble:not(.service) .replies-footer-text,
+html.tgblur-enabled .bubbles .bubble.service .service-msg,
+html.tgblur-enabled .reply-markup-button,
+html.tgblur-enabled .pinned-message-content,
+html.tgblur-enabled .pinned-message-subtitle,
+html.tgblur-enabled .pinned-message-action-button,
+html.tgblur-enabled .reply-wrapper-content > :not(.reply-cancel),
+html.tgblur-enabled .search-super-item .avatar,
+html.tgblur-enabled .search-super-item .media-container,
+html.tgblur-enabled .search-super-item .document-ico,
+html.tgblur-enabled .search-super-item .row-title,
+html.tgblur-enabled .search-super-item .row-subtitle,
+html.tgblur-enabled .search-super-item .peer-title,
+html.tgblur-enabled .search-super-item .document-name,
+html.tgblur-enabled .search-super-item .document-size,
+html.tgblur-enabled .search-super-item .preview.empty,
+html.tgblur-enabled .btn-menu .btn-menu-item-avatar,
+html.tgblur-enabled .btn-menu .btn-menu-item-avatar + .btn-menu-item-text,
+html.tgblur-enabled .btn-menu .archived-count,
+html.tgblur-enabled .shared-media-container .profile-name,
+html.tgblur-enabled .shared-media-container .profile-subtitle,
+html.tgblur-enabled .shared-media-container .profile-content .row:not(.no-subtitle) > .row-title,
+html.tgblur-enabled .shared-media-container .profile-content .row .row-title-right,
+html.tgblur-enabled .shared-media-container .chatlist-chat .member-tag {
+    filter: blur(var(--tgblur-text-blur)) !important;
+    transition: var(--tgblur-transition) !important;
+}
+
+html.tgblur-enabled .chatlist-chat .avatar,
+html.tgblur-enabled .bubbles .bubble:not(.service) .media-container,
+html.tgblur-enabled .bubbles .bubble:not(.service) .bubble-name-forwarded-avatar,
+html.tgblur-enabled .pinned-message-content img,
+html.tgblur-enabled .pinned-message-content video,
+html.tgblur-enabled .pinned-message-content canvas,
+html.tgblur-enabled .search-super-item .avatar,
+html.tgblur-enabled .search-super-item .media-container,
+html.tgblur-enabled .search-super-item .preview.empty,
+html.tgblur-enabled .btn-menu .btn-menu-item-avatar,
+html.tgblur-enabled .shared-media-container .profile-avatars-container .avatar-photo,
+html.tgblur-enabled .shared-media-container .profile-avatars-container .avatar-gradient,
+html.tgblur-enabled .settings-container .profile-avatars-container .avatar-gradient {
     filter: blur(var(--tgblur-media-blur)) brightness(0.72) !important;
     transition: var(--tgblur-transition) !important;
 }
 
-html.tgblur-enabled [class*="peer-title"],
-html.tgblur-enabled [class*="PeerTitle"],
-html.tgblur-enabled [class*="message"],
-html.tgblur-enabled [class*="Message"],
-html.tgblur-enabled [class*="text-content"],
-html.tgblur-enabled [class*="TextContent"],
-html.tgblur-enabled [class*="subtitle"],
-html.tgblur-enabled [class*="Subtitle"],
-html.tgblur-enabled [class*="title"],
-html.tgblur-enabled [class*="Title"],
-html.tgblur-enabled [class*="sender"],
-html.tgblur-enabled [class*="Sender"],
-html.tgblur-enabled [class*="last-message"],
-html.tgblur-enabled [class*="LastMessage"],
-html.tgblur-enabled [class*="ChatInfo"],
-html.tgblur-enabled [class*="chat-info"],
-html.tgblur-enabled [data-testid*="message"],
-html.tgblur-enabled a[href^="tel:"],
-html.tgblur-enabled a[href^="mailto:"] {
+html.tgblur-enabled .stories-list .avatar.has-stories .avatar.avatar-like:not(.has-stories) {
+    filter: blur(var(--tgblur-avatar-blur)) brightness(0.72) !important;
+    transition: var(--tgblur-transition) !important;
+}
+
+html.tgblur-enabled .bubbles .bubble.is-sponsored .bubble-content {
+    filter: blur(var(--tgblur-text-blur)) brightness(0.78) !important;
+    transition: var(--tgblur-transition) !important;
+}
+
+html.tgblur-enabled.tgblur-background .bubbles {
+    isolation: isolate;
+}
+
+html.tgblur-enabled.tgblur-background .bubbles::before {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+    backdrop-filter: blur(var(--tgblur-media-blur)) brightness(0.72);
+}
+
+html.tgblur-enabled.tgblur-background .bubbles-scrollable {
+    position: relative;
+    z-index: 1;
+}
+
+html.tgblur-enabled.tgblur-current-header .sidebar-header .chat-info .person .avatar {
+    filter: blur(var(--tgblur-avatar-blur)) brightness(0.72) !important;
+    transition: var(--tgblur-transition) !important;
+}
+
+html.tgblur-enabled.tgblur-current-header .sidebar-header .chat-info .person .peer-title,
+html.tgblur-enabled.tgblur-current-header .sidebar-header .chat-info .person .bottom .info {
     filter: blur(var(--tgblur-text-blur)) !important;
     transition: var(--tgblur-transition) !important;
 }
 
-html.tgblur-enabled input,
-html.tgblur-enabled textarea,
-html.tgblur-enabled [contenteditable="true"] {
+html.tgblur-enabled .pinned-call .topbar-call-center .stacked-avatars-avatar {
+    filter: blur(calc(var(--tgblur-small-avatar-blur) * 0.65)) brightness(0.78) !important;
+    transition: var(--tgblur-transition) !important;
+}
+
+html.tgblur-enabled .pinned-call .topbar-call-center .topbar-call-title .peer-title,
+html.tgblur-enabled .pinned-call .topbar-call-center .topbar-call-status > * {
+    display: inline-block;
+    filter: blur(clamp(2px, calc(var(--tgblur-text-blur) * 0.6), 5px)) !important;
+    transition: var(--tgblur-transition) !important;
+}
+
+html.tgblur-enabled.tgblur-reveal-hover .chatlist-chat:hover .avatar,
+html.tgblur-enabled.tgblur-reveal-hover .chatlist-chat:hover .peer-title,
+html.tgblur-enabled.tgblur-reveal-hover .chatlist-chat:hover .dialog-subtitle-parts,
+html.tgblur-enabled.tgblur-reveal-hover .chatlist-chat:hover .dialog-group-call-icon,
+html.tgblur-enabled.tgblur-reveal-hover .chatlist-chat:hover .badge:not(.badge-icon),
+html.tgblur-enabled.tgblur-reveal-hover .stories-list [role="button"]:hover .peer-title,
+html.tgblur-enabled.tgblur-reveal-hover .stories-list [role="button"]:hover .avatar.has-stories .avatar.avatar-like:not(.has-stories),
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble:not(.service) .bubble-content.tgblur-pointer-reveal .colored-name,
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble:not(.service) .bubble-content.tgblur-pointer-reveal .bubble-name-forwarded,
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble:not(.service) .bubble-content.tgblur-pointer-reveal .message,
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble:not(.service) .bubble-content.tgblur-pointer-reveal .document-name,
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble:not(.service) .bubble-content.tgblur-pointer-reveal .document-info,
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble:not(.service) .bubble-content.tgblur-pointer-reveal .reply,
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble:not(.service) .bubble-content.tgblur-pointer-reveal .replies-footer-text,
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble.service .bubble-content:is(:hover, .tgblur-pointer-reveal) .service-msg,
+html.tgblur-enabled.tgblur-reveal-hover .reply-markup-button:hover,
+html.tgblur-enabled.tgblur-reveal-hover .pinned-message-content:hover,
+html.tgblur-enabled.tgblur-reveal-hover .pinned-message-subtitle:hover,
+html.tgblur-enabled.tgblur-reveal-hover .pinned-message:hover .pinned-message-action-button,
+html.tgblur-enabled.tgblur-reveal-hover .reply-wrapper-content:hover > :not(.reply-cancel),
+html.tgblur-enabled.tgblur-reveal-hover .search-super-item:hover .avatar,
+html.tgblur-enabled.tgblur-reveal-hover .search-super-item:hover .media-container,
+html.tgblur-enabled.tgblur-reveal-hover .search-super-item:hover .document-ico,
+html.tgblur-enabled.tgblur-reveal-hover .search-super-item:hover .row-title,
+html.tgblur-enabled.tgblur-reveal-hover .search-super-item:hover .row-subtitle,
+html.tgblur-enabled.tgblur-reveal-hover .search-super-item:hover .peer-title,
+html.tgblur-enabled.tgblur-reveal-hover .search-super-item:hover .document-name,
+html.tgblur-enabled.tgblur-reveal-hover .search-super-item:hover .document-size,
+html.tgblur-enabled.tgblur-reveal-hover .search-super-item:hover .preview.empty,
+html.tgblur-enabled.tgblur-reveal-hover .btn-menu .btn-menu-item:hover .btn-menu-item-avatar,
+html.tgblur-enabled.tgblur-reveal-hover .btn-menu .btn-menu-item:hover .btn-menu-item-avatar + .btn-menu-item-text,
+html.tgblur-enabled.tgblur-reveal-hover .btn-menu .btn-menu-item:hover .archived-count,
+html.tgblur-enabled.tgblur-reveal-hover .shared-media-container .profile-content:hover .profile-name,
+html.tgblur-enabled.tgblur-reveal-hover .shared-media-container .profile-content:hover .profile-subtitle,
+html.tgblur-enabled.tgblur-reveal-hover .shared-media-container .profile-content:hover .profile-avatars-container .avatar-photo,
+html.tgblur-enabled.tgblur-reveal-hover .shared-media-container .profile-content:hover .profile-avatars-container .avatar-gradient,
+html.tgblur-enabled.tgblur-reveal-hover .shared-media-container .profile-content .row:not(.no-subtitle):hover > .row-title,
+html.tgblur-enabled.tgblur-reveal-hover .shared-media-container .profile-content .row:hover .row-title-right,
+html.tgblur-enabled.tgblur-reveal-hover .shared-media-container .chatlist-chat:hover .member-tag {
+    filter: none !important;
+    transition: filter 120ms ease var(--tgblur-hover-delay), opacity 120ms ease var(--tgblur-hover-delay) !important;
+}
+
+html.tgblur-enabled.tgblur-reveal-hover .sidebar-header .chat-info .person:hover .avatar,
+html.tgblur-enabled.tgblur-reveal-hover .sidebar-header .chat-info .person:hover .peer-title,
+html.tgblur-enabled.tgblur-reveal-hover .sidebar-header .chat-info .person:hover .bottom .info {
+    filter: none !important;
+    transition: filter 120ms ease var(--tgblur-hover-delay), opacity 120ms ease var(--tgblur-hover-delay) !important;
+}
+
+html.tgblur-enabled.tgblur-reveal-hover .pinned-call .topbar-call-center:hover .stacked-avatars-avatar,
+html.tgblur-enabled.tgblur-reveal-hover .pinned-call .topbar-call-center:hover .topbar-call-title .peer-title,
+html.tgblur-enabled.tgblur-reveal-hover .pinned-call .topbar-call-center:hover .topbar-call-status > * {
+    filter: none !important;
+    transition: filter 120ms ease var(--tgblur-hover-delay), opacity 120ms ease var(--tgblur-hover-delay) !important;
+}
+
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble:not(.service) .bubble-content.tgblur-pointer-reveal .media-container,
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble:not(.service) .bubble-content.tgblur-pointer-reveal .bubble-name-forwarded-avatar,
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble.poll-message:not(.service) .bubble-content.tgblur-pointer-reveal .message [class*="_pollOptionMedia_"] .media-container,
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble.poll-message:not(.service) .bubble-content.tgblur-pointer-reveal .message [class*="_pollOptionMedia_"] img.media-photo,
+html.tgblur-enabled.tgblur-reveal-hover .pinned-message-wrapper:hover .pinned-message-content,
+html.tgblur-enabled.tgblur-reveal-hover .pinned-message-wrapper:hover .pinned-message-subtitle,
+html.tgblur-enabled.tgblur-reveal-hover .pinned-message-content img:hover,
+html.tgblur-enabled.tgblur-reveal-hover .pinned-message-content video:hover,
+html.tgblur-enabled.tgblur-reveal-hover .pinned-message-content canvas:hover,
+html.tgblur-enabled.tgblur-reveal-hover .pinned-message-content:hover img,
+html.tgblur-enabled.tgblur-reveal-hover .pinned-message-content:hover video,
+html.tgblur-enabled.tgblur-reveal-hover .pinned-message-content:hover canvas,
+html.tgblur-enabled.tgblur-reveal-hover .pinned-message-wrapper:hover img,
+html.tgblur-enabled.tgblur-reveal-hover .pinned-message-wrapper:hover video,
+html.tgblur-enabled.tgblur-reveal-hover .pinned-message-wrapper:hover canvas,
+html.tgblur-enabled.tgblur-reveal-hover .search-super-item .media-container:hover {
+    filter: none !important;
+    transition: filter 120ms ease var(--tgblur-hover-delay), opacity 120ms ease var(--tgblur-hover-delay) !important;
+}
+
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble.is-sponsored .bubble-content.tgblur-pointer-reveal {
+    filter: none !important;
+    transition: filter 120ms ease var(--tgblur-hover-delay), opacity 120ms ease var(--tgblur-hover-delay) !important;
+}
+
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble.poll-message:not(.service) .bubble-content.tgblur-pointer-reveal .message [class*="_pollOptionMedia_"] {
+    filter: none !important;
+    transition: filter 120ms ease var(--tgblur-hover-delay), opacity 120ms ease var(--tgblur-hover-delay) !important;
+}
+
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble.poll-message:not(.service) .bubble-content.tgblur-pointer-reveal .message [class*="_pollOptionMedia_"] .media-photo {
+    filter: none !important;
+}
+
+html.tgblur-enabled .bubbles-group-avatar-container .avatar-photo,
+html.tgblur-enabled .bubbles-group-avatar-container .avatar-gradient,
+html.tgblur-enabled .bubbles .bubble:not(.service) .reaction-sticker,
+html.tgblur-enabled .bubbles .bubble:not(.service) .stacked-avatars-avatar-container .avatar-photo,
+html.tgblur-enabled .bubbles .bubble:not(.service) .stacked-avatars-avatar-container .avatar-gradient {
+    filter: blur(var(--tgblur-small-avatar-blur)) brightness(0.72) !important;
+    transition: var(--tgblur-transition) !important;
+}
+
+html.tgblur-enabled .bubbles-group-avatar-container .avatar-photo {
+    filter: blur(var(--tgblur-avatar-blur)) brightness(0.72) !important;
+}
+
+html.tgblur-enabled .bubbles-group-avatar-container .avatar-gradient {
+    filter: blur(var(--tgblur-avatar-blur)) brightness(0.72) !important;
+}
+
+html.tgblur-enabled .bubbles reactions-element .time {
     filter: blur(var(--tgblur-text-blur)) !important;
+    transition: var(--tgblur-transition) !important;
 }
 
-html.tgblur-enabled.tgblur-reveal-hover [class*="Avatar"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="avatar"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="Photo"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="photo"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover img:hover,
-html.tgblur-enabled.tgblur-reveal-hover video:hover,
-html.tgblur-enabled.tgblur-reveal-hover canvas:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="peer-title"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="PeerTitle"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="message"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="Message"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="text-content"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="TextContent"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="subtitle"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="Subtitle"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="title"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="Title"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="sender"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="Sender"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="last-message"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="LastMessage"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="ChatInfo"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [class*="chat-info"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover [data-testid*="message"]:hover,
-html.tgblur-enabled.tgblur-reveal-hover input:hover,
-html.tgblur-enabled.tgblur-reveal-hover textarea:hover,
-html.tgblur-enabled.tgblur-reveal-hover [contenteditable="true"]:hover {
+html.tgblur-enabled .settings-container .profile-avatars-container .avatar-photo,
+html.tgblur-enabled .settings-container .profile-avatars-container .avatar-gradient {
+    filter: blur(var(--tgblur-media-blur)) brightness(0.72) !important;
+    transition: var(--tgblur-transition) !important;
+}
+
+html.tgblur-enabled .settings-container .profile-name,
+html.tgblur-enabled .settings-container .profile-subtitle,
+html.tgblur-enabled .settings-container .row:not(.no-subtitle) > .row-title,
+html.tgblur-enabled .settings-container .row .row-title-right,
+html.tgblur-enabled .settings-container .member-tag {
+    filter: blur(var(--tgblur-text-blur)) !important;
+    transition: var(--tgblur-transition) !important;
+}
+
+html.tgblur-enabled.tgblur-reveal-hover .bubbles-group-avatar-container:hover .avatar-photo,
+html.tgblur-enabled.tgblur-reveal-hover .bubbles-group-avatar-container:hover .avatar-gradient,
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble:not(.service) .bubble-content.tgblur-pointer-reveal .reaction-sticker,
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble:not(.service) .bubble-content.tgblur-pointer-reveal .stacked-avatars-avatar-container .avatar-photo,
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble:not(.service) .bubble-content.tgblur-pointer-reveal .stacked-avatars-avatar-container .avatar-gradient,
+html.tgblur-enabled.tgblur-reveal-hover .bubbles .bubble:not(.service) .bubble-content.tgblur-pointer-reveal reactions-element .time,
+html.tgblur-enabled.tgblur-reveal-hover .settings-container .profile-content:hover .profile-avatars-container .avatar-photo,
+html.tgblur-enabled.tgblur-reveal-hover .settings-container .profile-content:hover .profile-avatars-container .avatar-gradient,
+html.tgblur-enabled.tgblur-reveal-hover .settings-container .profile-content:hover .profile-name,
+html.tgblur-enabled.tgblur-reveal-hover .settings-container .profile-content:hover .profile-subtitle,
+html.tgblur-enabled.tgblur-reveal-hover .settings-container .row:not(.no-subtitle):hover > .row-title,
+html.tgblur-enabled.tgblur-reveal-hover .settings-container .row:hover .row-title-right,
+html.tgblur-enabled.tgblur-reveal-hover .settings-container .member-tag:hover {
+    filter: none !important;
+    transition: filter 120ms ease var(--tgblur-hover-delay), opacity 120ms ease var(--tgblur-hover-delay) !important;
+}
+
+html.tgblur-enabled:not(.tgblur-blur-text) .stories-list [role="button"] .peer-title,
+html.tgblur-enabled:not(.tgblur-blur-text) .reply-markup-button,
+html.tgblur-enabled:not(.tgblur-blur-text) .reply-wrapper-content > :not(.reply-cancel),
+html.tgblur-enabled:not(.tgblur-blur-text) .search-super-item .row-title,
+html.tgblur-enabled:not(.tgblur-blur-text) .search-super-item .row-subtitle,
+html.tgblur-enabled:not(.tgblur-blur-text) .search-super-item .peer-title,
+html.tgblur-enabled:not(.tgblur-blur-text) .search-super-item .document-name,
+html.tgblur-enabled:not(.tgblur-blur-text) .search-super-item .document-size,
+html.tgblur-enabled:not(.tgblur-blur-text) .btn-menu .btn-menu-item-avatar + .btn-menu-item-text,
+html.tgblur-enabled:not(.tgblur-blur-text) .btn-menu .archived-count,
+html.tgblur-enabled:not(.tgblur-blur-text) .shared-media-container .profile-name,
+html.tgblur-enabled:not(.tgblur-blur-text) .shared-media-container .profile-subtitle,
+html.tgblur-enabled:not(.tgblur-blur-text) .shared-media-container .profile-content .row > .row-title,
+html.tgblur-enabled:not(.tgblur-blur-text) .shared-media-container .profile-content .row .row-title-right,
+html.tgblur-enabled:not(.tgblur-blur-text) .shared-media-container .chatlist-chat .member-tag,
+html.tgblur-enabled:not(.tgblur-blur-text) .pinned-call .topbar-call-center .topbar-call-title .peer-title,
+html.tgblur-enabled:not(.tgblur-blur-text) .pinned-call .topbar-call-center .topbar-call-status > *,
+html.tgblur-enabled:not(.tgblur-blur-text) .settings-container .profile-name,
+html.tgblur-enabled:not(.tgblur-blur-text) .settings-container .profile-subtitle,
+html.tgblur-enabled:not(.tgblur-blur-text) .settings-container .row > .row-title,
+html.tgblur-enabled:not(.tgblur-blur-text) .settings-container .row .row-title-right,
+html.tgblur-enabled:not(.tgblur-blur-text) .settings-container .member-tag {
     filter: none !important;
 }
 
-html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="Avatar"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="avatar"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="Photo"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="photo"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="peer-title"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="PeerTitle"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="message"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="Message"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="subtitle"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="Subtitle"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="title"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover [class*="Title"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover img,
-html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover video,
-html.tgblur-enabled.tgblur-reveal-hover #column-left .chatlist-chat:hover canvas {
+html.tgblur-enabled:not(.tgblur-blur-avatars) .stories-list .avatar.has-stories .avatar.avatar-like:not(.has-stories),
+html.tgblur-enabled:not(.tgblur-blur-avatars) .search-super-item .avatar,
+html.tgblur-enabled:not(.tgblur-blur-avatars) .search-super-item .preview.empty,
+html.tgblur-enabled:not(.tgblur-blur-avatars) .btn-menu .btn-menu-item-avatar,
+html.tgblur-enabled:not(.tgblur-blur-avatars) .shared-media-container .profile-avatars-container .avatar-photo,
+html.tgblur-enabled:not(.tgblur-blur-avatars) .shared-media-container .profile-avatars-container .avatar-gradient,
+html.tgblur-enabled:not(.tgblur-blur-avatars) .settings-container .profile-avatars-container .avatar-photo,
+html.tgblur-enabled:not(.tgblur-blur-avatars) .settings-container .profile-avatars-container .avatar-gradient,
+html.tgblur-enabled:not(.tgblur-blur-avatars) .pinned-call .topbar-call-center .stacked-avatars-avatar {
     filter: none !important;
 }
 
-html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover [class*="Avatar"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover [class*="avatar"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover [class*="Photo"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover [class*="photo"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover [class*="peer-title"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover [class*="PeerTitle"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover [class*="title"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover [class*="Title"],
-html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover img,
-html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover video,
-html.tgblur-enabled.tgblur-reveal-hover #column-left .search-helper .selector-user:hover canvas {
+html.tgblur-enabled:not(.tgblur-blur-media) .search-super-item .media-container,
+html.tgblur-enabled:not(.tgblur-blur-media) .search-super-item .document-ico {
     filter: none !important;
+}
+
+html.tgblur-enabled.tgblur-chatlist-badges .chatlist-chat .badge:not(.badge-icon) {
+    filter: blur(var(--tgblur-text-blur)) !important;
+    transition: var(--tgblur-transition) !important;
+}
+
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-chatlist-message) .chatlist-chat .dialog-subtitle-parts {
+    filter: none !important;
+}
+
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-chatlist-identity) .chatlist-chat .avatar,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-chatlist-identity) .chatlist-chat .peer-title,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-chatlist-identity) .chatlist-chat .dialog-group-call-icon {
+    filter: none !important;
+}
+
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-chatlist-badges) .chatlist-chat .badge:not(.badge-icon) {
+    filter: none !important;
+}
+
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-author) .bubbles-group-avatar-container .avatar-photo,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-author) .bubbles-group-avatar-container .avatar-gradient {
+    filter: none !important;
+}
+
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-messages) .bubbles .bubble:not(.service) .colored-name,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-messages) .bubbles .bubble:not(.service) .bubble-name-forwarded,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-messages) .bubbles .bubble:not(.service) .bubble-name-forwarded-avatar,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-messages) .bubbles .bubble:not(.service) .message,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-messages) .bubbles .bubble:not(.service) .media-container,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-messages) .bubbles .bubble:not(.service) .document-name,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-messages) .bubbles .bubble:not(.service) .document-info,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-messages) .bubbles .bubble:not(.service) .reply,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-messages) .bubbles .bubble:not(.service) .replies-footer-text,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-messages) .bubbles .bubble:not(.service) .reaction-sticker,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-messages) .bubbles .bubble:not(.service) .stacked-avatars-avatar-container .avatar-photo,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-messages) .bubbles .bubble:not(.service) .stacked-avatars-avatar-container .avatar-gradient,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-messages) .bubbles .bubble:not(.service) reactions-element .time,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-messages) .bubbles .bubble.is-sponsored .bubble-content,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-messages) .bubbles .bubble.poll-message [class*="_pollOptionMedia_"] {
+    filter: none !important;
+}
+
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-pinned) .pinned-message-content,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-pinned) .pinned-message-subtitle,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-pinned) .pinned-message-action-button,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-pinned) .pinned-message-content img,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-pinned) .pinned-message-content video,
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-pinned) .pinned-message-content canvas {
+    filter: none !important;
+}
+
+html.tgblur-enabled:not(#tgblur-category-specificity):not(.tgblur-current-dates) .bubbles .bubble.service .service-msg {
+    filter: none !important;
+}
+
+html.tgblur-enabled.tgblur-reveal-click:not(#tgblur-specificity):not(#tgblur-specificity-2) .tgblur-click-reveal,
+html.tgblur-enabled.tgblur-reveal-click:not(#tgblur-specificity):not(#tgblur-specificity-2) .tgblur-click-reveal * {
+    filter: none !important;
+    transition: none !important;
+}
+
+html.tgblur-enabled.tgblur-reveal-chat #column-center,
+html.tgblur-enabled.tgblur-reveal-chat #column-center * {
+    filter: none !important;
+    transition: none !important;
+}
+
+html.tgblur-enabled.tgblur-reveal-chat #column-center .bubbles::before {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
 }

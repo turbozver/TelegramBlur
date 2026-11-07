@@ -8,11 +8,14 @@
 </head>
 <body>
     <header class="app-header">
-        <button id="settingsBtn" class="icon-button" type="button" title="Settings">&#9881;</button>
+        <div class="brand-mark" aria-hidden="true">
+            <img src="icons/icon48.png" alt="">
+        </div>
         <div class="title-block">
             <h1>Telegram Blur</h1>
             <p id="status">Enabled</p>
         </div>
+        <button id="settingsBtn" class="icon-button" type="button" title="Settings">&#9881;</button>
     </header>
 
     <main id="mainView" class="view">
@@ -26,24 +29,95 @@
             </label>
             <label class="switch-row">
                 <span>
-                    <strong>Reveal On Hover</strong>
-                    <small>Temporarily unblur hovered item</small>
+                    <strong>Reveal protected content</strong>
+                    <small>Temporarily show individual items</small>
                 </span>
                 <input id="revealOnHover" type="checkbox">
             </label>
-        </section>
-
-        <section class="panel range-panel">
-            <label>
-                <span>Text blur</span>
-                <output id="textBlurValue">7px</output>
-                <input id="textBlur" type="range" min="2" max="16" step="1">
-            </label>
-            <label>
-                <span>Avatar and media blur</span>
-                <output id="mediaBlurValue">24px</output>
-                <input id="mediaBlur" type="range" min="8" max="36" step="1">
-            </label>
+            <div id="revealModeRow" class="mode-row hidden">
+                <span>
+                    <strong>Reveal mode</strong>
+                    <small>Choose how individual items are revealed</small>
+                </span>
+                <div id="revealModeControl" class="segmented-control" role="group" aria-label="Reveal mode">
+                    <button type="button" data-reveal-mode="hover">Hover</button>
+                    <button type="button" data-reveal-mode="click">Click</button>
+                </div>
+            </div>
+            <div id="clickRevealBindingRow" class="shortcut-row reveal-binding-row hidden">
+                <span>
+                    <strong>Reveal input</strong>
+                    <small>Any keyboard key, mouse button or modifier combination</small>
+                </span>
+                <button id="clickRevealBindingButton" type="button">Mouse1</button>
+            </div>
+            <div id="clickRevealRetentionRow" class="mode-row click-option-row hidden">
+                <span>
+                    <strong>Previous items</strong>
+                    <small>Choose whether older reveals stay visible</small>
+                </span>
+                <div class="segmented-control" role="group" aria-label="Previous revealed items">
+                    <button type="button" data-click-retention="single">Replace</button>
+                    <button type="button" data-click-retention="multiple">Keep</button>
+                </div>
+            </div>
+            <div id="clickRevealActionRow" class="mode-row click-option-row hidden">
+                <span>
+                    <strong>Bound input action</strong>
+                    <small>Allow or suppress its normal Telegram action</small>
+                </span>
+                <div class="segmented-control wide-segmented" role="group" aria-label="Bound input action">
+                    <button type="button" data-click-action="block">Reveal only</button>
+                    <button type="button" data-click-action="pass">Reveal + action</button>
+                </div>
+            </div>
+            <div id="hoverRevealDelayRow" class="timer-row reveal-delay-row hidden">
+                <span>
+                    <strong>Reveal after hover</strong>
+                    <small>Delay before hovered content becomes visible</small>
+                </span>
+                <span class="number-stepper">
+                    <input id="hoverRevealDelay" type="number" min="0" max="10" step="0.05" aria-label="Hover reveal delay in seconds">
+                    <span class="number-stepper-buttons">
+                        <button type="button" data-step-target="hoverRevealDelay" data-step-direction="up" aria-label="Increase hover delay"></button>
+                        <button type="button" data-step-target="hoverRevealDelay" data-step-direction="down" aria-label="Decrease hover delay"></button>
+                    </span>
+                </span>
+                <output id="hoverRevealDelayValue">0s</output>
+            </div>
+            <div id="revealDelayRow" class="timer-row reveal-delay-row hidden">
+                <span>
+                    <strong>Keep revealed after unhover</strong>
+                    <small>How long content stays visible after the pointer leaves</small>
+                </span>
+                <span class="number-stepper">
+                    <input id="revealBlurDelay" type="number" min="0" max="60" step="0.05" aria-label="Reveal duration in seconds">
+                    <span class="number-stepper-buttons">
+                        <button type="button" data-step-target="revealBlurDelay" data-step-direction="up" aria-label="Increase reveal duration"></button>
+                        <button type="button" data-step-target="revealBlurDelay" data-step-direction="down" aria-label="Decrease reveal duration"></button>
+                    </span>
+                </span>
+                <output id="revealBlurDelayValue">0s</output>
+            </div>
+            <div class="timer-row main-timer-row">
+                <span>
+                    <strong>Auto-blur after idle</strong>
+                    <small>0 disables the timer</small>
+                </span>
+                <span class="number-stepper">
+                    <input id="idleBlurDelay" type="number" min="0" max="3600" step="5" aria-label="Idle duration in seconds">
+                    <span class="number-stepper-buttons">
+                        <button type="button" data-step-target="idleBlurDelay" data-step-direction="up" aria-label="Increase idle duration"></button>
+                        <button type="button" data-step-target="idleBlurDelay" data-step-direction="down" aria-label="Decrease idle duration"></button>
+                    </span>
+                </span>
+                <output id="idleBlurDelayValue">0s</output>
+            </div>
+            <div class="command-separator"></div>
+            <button id="revealChatBtn" class="command-button" type="button">
+                <span>Reveal Current Chat</span>
+                <small id="revealChatDurationLabel">10 seconds</small>
+            </button>
         </section>
     </main>
 
@@ -52,7 +126,6 @@
             <div class="settings-block">
                 <div class="settings-block-title">
                     <strong>Behavior</strong>
-                    <span>Local-only controls for Telegram Web.</span>
                 </div>
                 <label class="shortcut-row">
                     <span>
@@ -61,20 +134,123 @@
                     </span>
                     <button id="shortcutButton" type="button">Alt+Shift+B</button>
                 </label>
-                <label class="timer-row">
+            </div>
+
+            <div class="settings-block">
+                <div class="settings-block-title">
+                    <strong>Current Chat Reveal</strong>
+                    <span>Temporarily show the open chat without changing global blur.</span>
+                </div>
+                <div class="shortcut-row chat-reveal-binding-row">
                     <span>
-                        <strong>Auto-blur after idle</strong>
-                        <small>0 disables the timer</small>
+                        <strong>Toggle binding</strong>
+                        <small>Any keyboard key, mouse button or modifier combination</small>
                     </span>
-                    <input id="idleBlurDelay" type="number" min="0" max="3600" step="5">
-                    <output id="idleBlurDelayValue">0s</output>
+                    <span class="binding-control">
+                        <button id="chatRevealBindingButton" type="button">Not set</button>
+                        <button id="chatRevealBindingClear" class="binding-clear" type="button" title="Clear binding" aria-label="Clear binding">&times;</button>
+                    </span>
+                </div>
+                <div class="timer-row setting-timer-row">
+                    <span>
+                        <strong>Chat reveal duration</strong>
+                        <small>How long Reveal Current Chat stays active</small>
+                    </span>
+                    <span class="number-stepper">
+                        <input id="chatRevealDuration" type="number" min="1" max="3600" step="1" aria-label="Chat reveal duration in seconds">
+                        <span class="number-stepper-buttons">
+                            <button type="button" data-step-target="chatRevealDuration" data-step-direction="up" aria-label="Increase chat reveal duration"></button>
+                            <button type="button" data-step-target="chatRevealDuration" data-step-direction="down" aria-label="Decrease chat reveal duration"></button>
+                        </span>
+                    </span>
+                    <output id="chatRevealDurationValue">10s</output>
+                </div>
+            </div>
+
+            <div class="settings-block content-options">
+                <div class="settings-block-title">
+                    <strong>Blur Content</strong>
+                    <span>Configure Telegram areas separately.</span>
+                </div>
+                <div class="content-subsection">
+                    <strong class="content-subtitle">Chat List</strong>
+                    <label class="switch-row setting-switch-row first-setting-row">
+                        <span><strong>Last message</strong><small>Message preview under each chat</small></span>
+                        <input id="blurChatListMessage" type="checkbox">
+                    </label>
+                    <label class="switch-row setting-switch-row">
+                        <span><strong>Name and icon</strong><small>Chat title, avatar and call indicator</small></span>
+                        <input id="blurChatListIdentity" type="checkbox">
+                    </label>
+                    <label class="switch-row setting-switch-row">
+                        <span><strong>Unread count</strong><small>Message and mention counters</small></span>
+                        <input id="blurChatListBadges" type="checkbox">
+                    </label>
+                </div>
+                <div class="content-subsection">
+                    <strong class="content-subtitle">Current Chat</strong>
+                    <label class="switch-row setting-switch-row first-setting-row">
+                        <span><strong>Author avatar</strong><small>Avatar beside incoming messages</small></span>
+                        <input id="blurCurrentAuthor" type="checkbox">
+                    </label>
+                    <label class="switch-row setting-switch-row">
+                        <span><strong>Message content</strong><small>Text, media, files and reactions</small></span>
+                        <input id="blurCurrentMessages" type="checkbox">
+                    </label>
+                    <label class="switch-row setting-switch-row">
+                        <span><strong>Chat name and icon</strong><small>Title, status and avatar in the top bar</small></span>
+                        <input id="blurCurrentHeader" type="checkbox">
+                    </label>
+                    <label class="switch-row setting-switch-row">
+                        <span><strong>Pinned message</strong><small>Preview and media in the pinned panel</small></span>
+                        <input id="blurCurrentPinned" type="checkbox">
+                    </label>
+                    <label class="switch-row setting-switch-row">
+                        <span><strong>Date badges</strong><small>Dates and service events between messages</small></span>
+                        <input id="blurCurrentDates" type="checkbox">
+                    </label>
+                </div>
+                <div class="content-subsection">
+                    <strong class="content-subtitle">Other Areas</strong>
+                    <label class="switch-row setting-switch-row first-setting-row">
+                        <span><strong>Text and names</strong><small>Search, profiles, menus and settings</small></span>
+                        <input id="blurText" type="checkbox">
+                    </label>
+                    <label class="switch-row setting-switch-row">
+                        <span><strong>Avatars</strong><small>Profiles, stories, search and account menus</small></span>
+                        <input id="blurAvatars" type="checkbox">
+                    </label>
+                    <label class="switch-row setting-switch-row">
+                        <span><strong>Media</strong><small>Photos, videos, files and reactions elsewhere</small></span>
+                        <input id="blurMedia" type="checkbox">
+                    </label>
+                    <label class="switch-row setting-switch-row">
+                        <span><strong>Chat background</strong><small>Wallpaper and decorative background layers</small></span>
+                        <input id="blurBackground" type="checkbox">
+                    </label>
+                </div>
+            </div>
+
+            <div class="settings-block range-panel">
+                <div class="settings-block-title">
+                    <strong>Blur Strength</strong>
+                    <span>Choose separate strength for text and media.</span>
+                </div>
+                <label>
+                    <span>Text blur</span>
+                    <output id="textBlurValue">8px</output>
+                    <input id="textBlur" type="range" min="2" max="32" step="1">
+                </label>
+                <label>
+                    <span>Avatar and media blur</span>
+                    <output id="mediaBlurValue">32px</output>
+                    <input id="mediaBlur" type="range" min="8" max="64" step="1">
                 </label>
             </div>
 
             <div class="settings-block">
                 <div class="settings-block-title">
                     <strong>About</strong>
-                    <span>Settings are stored locally in browser storage.</span>
                 </div>
                 <div class="settings-links">
                     <a class="link-card" href="https://github.com/turbozver/TelegramBlur" target="_blank" rel="noreferrer">
@@ -101,14 +277,30 @@
             <div class="settings-block">
                 <div class="settings-block-title">
                     <strong>Data</strong>
-                    <span>Reset only this extension configuration.</span>
                 </div>
                 <div class="settings-actions">
                     <button id="resetBtn" class="danger" type="button">Reset Settings</button>
                 </div>
             </div>
+
         </section>
     </main>
+
+    <dialog id="confirmDialog" class="confirm-dialog">
+        <form method="dialog">
+            <header>
+                <span class="confirm-icon" aria-hidden="true"></span>
+                <span>
+                    <h2 id="confirmTitle">Confirm Action</h2>
+                    <p id="confirmMessage"></p>
+                </span>
+            </header>
+            <footer>
+                <button id="confirmCancel" type="button">Cancel</button>
+                <button id="confirmAccept" class="primary" type="button">Confirm</button>
+            </footer>
+        </form>
+    </dialog>
 
     <script src="popup.js"></script>
 </body>

@@ -1,14 +1,19 @@
 # Telegram Blur
 
-Extension for blurring private Telegram Web content, including chats, messages, media, and avatars.
+Privacy-focused extension for blurring sensitive Telegram Web content while keeping it easy to reveal only when needed.
 
 ## Features
 
-- Blur Telegram Web chat list, messages, media, names, and avatars
-- Toggle blur from the popup or with a configurable in-page shortcut
-- Configure blur strength and reveal behavior
-- Automatically enable blur after an inactivity timeout
-- Keep all settings local to the browser
+- Blur chat names, icons, message previews, unread counters, messages, author avatars, media, pinned messages, date badges, and other private content
+- Configure the chat list, current chat, and other Telegram areas independently
+- Reveal protected content by hovering over it or by pressing a configurable keyboard or mouse binding
+- In click mode, reveal one item at a time or keep multiple items visible, with optional pass-through of the original button action
+- Configure hover reveal delay and how long content remains visible after unhover
+- Temporarily reveal or re-blur the entire current chat from the popup or with a separate configurable binding
+- Automatically blur an inactive Telegram tab after a configurable idle timeout
+- Configure text and media blur strength separately and optionally blur the chat background
+- Toggle protection from the popup or with a configurable in-page shortcut
+- Store all settings locally in the browser
 
 ## Supported Pages
 
@@ -30,7 +35,7 @@ Extension for blurring private Telegram Web content, including chats, messages, 
 
 ![Blurred Telegram chat](screenshots/1.png)
 
-**2. Blur strength, reveal behavior, and shortcut settings**
+**2. Content categories, reveal modes, shortcuts, idle protection, and blur strength settings**
 
 ![Extension popup](screenshots/2.png)
 
